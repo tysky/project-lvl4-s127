@@ -23,9 +23,11 @@
   "homepage": "https://github.com/tysky/project-lvl4-s127#readme",
   "dependencies": {
     "bootstrap": "4.0.0-beta.2",
+    "dotenv": "^4.0.0",
     "koa": "*",
     "koa-pug": "3.0.0-2",
     "koa-router": "next",
+    "rollbar": "^2.3.1",
     "webpack": "*"
   },
   "devDependencies": {
