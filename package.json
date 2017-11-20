@@ -3,13 +3,18 @@
   "version": "0.0.1",
   "description": "Simple task manager",
   "main": "index.js",
+  "bin": {
+    "task-manager": "dist/bin/server.js"
+  },
+  "engines": {
+    "node": "8"
+  },
   "scripts": {
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "eslint": "eslint",
     "nodemon": "nodemon",
     "prepublish": "npm run build",
-    "start": "npm run nodemon -- --exec babel-node bin/server.js",
     "test": "jest"
   },
   "repository": {
