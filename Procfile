@@ -1,1 +1,1 @@
-web: $(npm bin)/babel-node ./bin/server.js
+web: yarn start
