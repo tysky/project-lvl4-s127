@@ -1,5 +1,5 @@
 #!/usr/bin/env babel-node
 
-import app from '../src';
+// import app from '../src';
 
-app.listen(3000);
+// app.listen(3000);

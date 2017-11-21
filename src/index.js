@@ -19,7 +19,7 @@ app.use(async (ctx, next) => {
 });
 
 app.use((ctx) => {
-  ctx.body = 'Hello User!';
+  ctx.body = 'Hello Ksendrik!';
 });
 
 export default app;

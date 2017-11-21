@@ -1,8 +1,8 @@
 install:
 	npm install
 
-# start:
-# 	DEBUG="application:*" npm run nodemon -- --exec babel-node bin/server.js
+start:
+		DEBUG="application:*" npm run nodemon -- --watch .  --ext '.js' --exec npm run gulp -- server
 
 publish:
 	npm publish
