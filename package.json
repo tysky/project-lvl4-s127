@@ -65,6 +65,7 @@
     "lodash": "*",
     "pg": "*",
     "popper.js": "*",
+    "rollbar": "^2.3.1",
     "sequelize": "*",
     "sequelize-cli": "*",
     "sqlite3": "*",
