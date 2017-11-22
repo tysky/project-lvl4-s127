@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const rollbar = new Rollbar('d759670a75a24636a561ebef1945a712');
+const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN_FOR_HEROKU);
 const app = new Koa();
 
 rollbar.log('Hello new world!');
