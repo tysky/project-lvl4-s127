@@ -16,7 +16,7 @@
     "gulp": "gulp",
     "sequelize": "sequelize",
     "nodemon": "nodemon",
-    "test": "jest",
+    "test": "jest --colors",
     "babel-node": "babel-node",
     "flow": "flow",
     "flow-typed": "flow-typed",
@@ -75,6 +75,7 @@
   },
   "devDependencies": {
     "babel-eslint": "*",
+    "babel-jest": "^21.2.0",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-flowtype": "*",
