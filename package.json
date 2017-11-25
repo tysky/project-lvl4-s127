@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/tysky/project-lvl4-s127#readme",
   "dependencies": {
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^7.1.6",
     "babel-cli": "*",
     "babel-core": "*",
     "babel-loader": "*",
@@ -65,6 +65,8 @@
     "lodash": "*",
     "pg": "*",
     "popper.js": "*",
+    "postcss-loader": "^2.0.9",
+    "precss": "^2.0.0",
     "rollbar": "^2.3.1",
     "sequelize": "*",
     "sequelize-cli": "*",
