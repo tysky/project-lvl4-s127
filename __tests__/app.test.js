@@ -20,6 +20,12 @@ describe('requests', () => {
     expect(res).toHaveHTTPStatus(200);
   });
 
+  it('GET 404', async () => {
+    const res = await request.agent(server)
+      .get('/wrong-path');
+    expect(res).toHaveHTTPStatus(404);
+  });
+
   afterEach((done) => {
     server.close();
     done();
