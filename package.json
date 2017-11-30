@@ -16,14 +16,14 @@
     "gulp": "gulp",
     "sequelize": "sequelize",
     "nodemon": "nodemon",
-    "test": "jest --colors",
+    "test": "NODE_ENV=test jest --colors",
     "babel-node": "babel-node",
     "flow": "flow",
     "flow-typed": "flow-typed",
     "start": "gulp server",
     "eslint": "eslint",
     "webpack": "webpack",
-    "build": "npm run webpack -- -p --env production && babel src --out-dir dist --source-maps inline",
+    "build": "npm run webpack -- -p --env.NODE_ENV=production && babel src --out-dir dist --source-maps inline",
     "postinstall": "npm run build"
   },
   "repository": {

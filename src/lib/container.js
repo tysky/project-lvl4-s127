@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-import logger from './lib/logger';
+import logger from './logger';
 
 dotenv.config();
 
