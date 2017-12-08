@@ -17,6 +17,7 @@ import _ from 'lodash';
 import addRoutes from './routes';
 import container from './lib/container';
 import getWebpackConfig from '../webpack.config.babel';
+import models from './models';
 
 export default () => {
   const app = new Koa();
@@ -40,8 +41,8 @@ export default () => {
       }
     }
   });
-  // app.use(flash());
   app.use(session(app));
+  app.use(flash());
 
   app.use(async (ctx, next) => {
     ctx.state = {
@@ -86,5 +87,9 @@ export default () => {
     ],
   });
   pug.use(app);
+  const syncDB = async () => {
+    await models.sequelize.sync();
+  };
+  syncDB();
   return app;
 };
