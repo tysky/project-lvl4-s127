@@ -16,5 +16,5 @@ block content
         th(scope="row") last name
         td= user.lastName
 
-  a.btn.btn-lg.btn-outline-info.m-3(href=urlFor('userEdit', { id: userId() })) Edit user info
-  a.btn.btn-lg.btn-outline-danger(href='/') Delete user
+  a.btn.btn-lg.btn-outline-info.m-3(href=urlFor('userEdit', { id: userId() }) rel='nofollow' role='button') Edit user info
+  a.btn.btn-lg.btn-outline-danger(href=urlFor('userDelete', { id: userId() }) data-method='delete' rel='nofollow' role='button') Delete user

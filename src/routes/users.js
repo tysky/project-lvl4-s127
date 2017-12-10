@@ -36,18 +36,19 @@ export default (router) => {
       }
     })
     .get('userEdit', '/users/:id/edit', async (ctx) => {
-      if (Number(ctx.params.id) !== ctx.session.userId) {
-        ctx.state.errorMessage = "You can't edit another user!";
+      const id = Number(ctx.params.id);
+      if (id !== ctx.session.userId) {
+        ctx.flash.set("You can't edit another user!");
         ctx.redirect(router.url('root'));
         return;
       }
-      const user = await User.findById(Number(ctx.params.id));
+      const user = await User.findById(id);
       ctx.render('users/edit', { f: buildFormObj(user) });
     })
     .patch('userUpdate', '/users/:id', async (ctx) => {
       const id = Number(ctx.params.id);
       if (id !== ctx.session.userId) {
-        ctx.state.errorMessage = "You can't edit another user!";
+        ctx.flash.set("You can't edit another user!");
         ctx.redirect(router.url('root'));
         return;
       }
@@ -64,5 +65,17 @@ export default (router) => {
         ctx.state.errorMessage = 'Error with updating user info!';
         ctx.render('users/edit', { f: buildFormObj(user, e) });
       }
+    })
+    .delete('userDelete', '/users/:id', async (ctx) => {
+      const id = Number(ctx.params.id);
+      if (id !== ctx.session.userId) {
+        ctx.flash.set("You can't delete another user!");
+      } else {
+        const user = await User.findById(id);
+        await user.destroy();
+        ctx.session = {};
+        ctx.flash.set('User has been succesfully deleted');
+      }
+      ctx.redirect(router.url('root'));
     });
 };
