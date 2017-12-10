@@ -1,6 +1,7 @@
 import buildFormObj from '../lib/formObjectBuilder';
 import { User } from '../models';
 import log from '../lib/logger';
+import requiredAuth from '../lib/requiredAuth';
 
 export default (router) => {
   router
@@ -12,7 +13,7 @@ export default (router) => {
       const user = User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
     })
-    .post('users', '/users', async (ctx) => {
+    .post('users', '/users', requiredAuth, async (ctx) => {
       const { form } = ctx.request.body;
       log(form);
       const user = User.build(form);
@@ -25,9 +26,8 @@ export default (router) => {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
-    .get('userInfo', '/users/:id', async (ctx) => {
+    .get('userInfo', '/users/:id', requiredAuth, async (ctx) => {
       const user = await User.findById(ctx.params.id);
-
       try {
         ctx.render('users/info', { user });
       } catch (e) {
@@ -35,7 +35,7 @@ export default (router) => {
         ctx.render('users/', { f: buildFormObj(user, e) });
       }
     })
-    .get('userEdit', '/users/:id/edit', async (ctx) => {
+    .get('userEdit', '/users/:id/edit', requiredAuth, async (ctx) => {
       const id = Number(ctx.params.id);
       if (id !== ctx.session.userId) {
         ctx.flash.set("You can't edit another user!");
@@ -45,7 +45,7 @@ export default (router) => {
       const user = await User.findById(id);
       ctx.render('users/edit', { f: buildFormObj(user) });
     })
-    .patch('userUpdate', '/users/:id', async (ctx) => {
+    .patch('userUpdate', '/users/:id', requiredAuth, async (ctx) => {
       const id = Number(ctx.params.id);
       if (id !== ctx.session.userId) {
         ctx.flash.set("You can't edit another user!");
@@ -66,7 +66,7 @@ export default (router) => {
         ctx.render('users/edit', { f: buildFormObj(user, e) });
       }
     })
-    .delete('userDelete', '/users/:id', async (ctx) => {
+    .delete('userDelete', '/users/:id', requiredAuth, async (ctx) => {
       const id = Number(ctx.params.id);
       if (id !== ctx.session.userId) {
         ctx.flash.set("You can't delete another user!");
