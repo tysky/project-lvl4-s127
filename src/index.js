@@ -48,14 +48,14 @@ export default () => {
     ctx.state = {
       flash: ctx.flash,
       isSignedIn: () => ctx.session.userId !== undefined,
+      userId: () => ctx.session.userId,
+      fullName: () => ctx.session.fullName,
     };
     await next();
   });
 
-  // rollbar.log('msg!');
   app.use(bodyParser());
   app.use(methodOverride((req) => {
-  // return req?.body?._method;
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     return req.body._method; // eslint-disable-line
     }

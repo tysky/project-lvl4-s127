@@ -1,0 +1,8 @@
+extends /layouts/application.pug
+
+block content
+  +formFor(f, { url: urlFor('userUpdate', userId()), method: 'post' })
+    +input(f, 'firstName')
+    +input(f, 'lastName')
+    input(type="hidden" name="_method" value="PATCH")
+    +button(f)

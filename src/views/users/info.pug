@@ -1,0 +1,20 @@
+extends /layouts/application.pug
+
+block content
+  table.table.table-bordered.w-50.mx-3(style="border-color:green;")
+    thead
+      tr
+        th(scope="col") #
+        th(scope="col") User info
+      tr
+        th(scope="row") email
+        td= user.email
+      tr
+        th(scope="row") first name
+        td= user.firstName
+      tr
+        th(scope="row") last name
+        td= user.lastName
+
+  a.btn.btn-lg.btn-outline-info.m-3(href=urlFor('userEdit', { id: userId() })) Edit user info
+  a.btn.btn-lg.btn-outline-danger(href='/') Delete user

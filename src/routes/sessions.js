@@ -17,6 +17,7 @@ export default (router) => {
       });
       if (user && user.passwordDigest === encrypt(password)) {
         ctx.session.userId = user.id;
+        ctx.session.fullName = user.fullName;
         ctx.flash.set(`Welcome ${user.firstName}`);
         ctx.redirect(router.url('root'));
         return;

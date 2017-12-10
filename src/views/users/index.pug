@@ -1,15 +1,17 @@
 extends /layouts/application.pug
 
 block content
-  table.table.table-stripped
+  table.table.table-striped
     thead
       tr
+        th Id
         th Full Name
         th Email
         th Created At
     tbody
       each user in users
         tr
+          td= user.id
           td= user.fullName
           td= user.email
           td= user.createdAt
