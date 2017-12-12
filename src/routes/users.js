@@ -55,7 +55,6 @@ export default (router) => {
       const { form } = ctx.request.body;
       log(form);
       const user = await User.findById(id);
-      console.log('===========', ctx.session.userId);
       try {
         await user.update({ ...form });
         ctx.session.fullName = user.fullName;
