@@ -58,12 +58,16 @@ describe('session', () => {
     server = app().listen();
   });
 
+  afterEach((done) => {
+    server.close();
+    done();
+  });
+
   it('GET /session/new', async () => {
     const res = await request.agent(server)
       .get('/session/new');
     expect(res).toHaveHTTPStatus(200);
   });
-
 
   it('GET /session/new', async () => {
     const res = await request.agent(server)
@@ -88,20 +92,9 @@ describe('session', () => {
   });
 
   it('Sign out', async () => {
-    const res = await request.agent(server)
-      .post('/session')
-      .type('form')
-      .send({ form: { ...user } });
-    expect(res).toHaveHTTPStatus(302);
-
     const res2 = await request.agent(server)
       .delete('/session');
     expect(res2).toHaveHTTPStatus(302);
-  });
-
-  afterEach((done) => {
-    server.close();
-    done();
   });
 });
 
@@ -112,8 +105,13 @@ describe('users', () => {
     jasmine.addMatchers(matchers);
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     server = app().listen();
+  });
+
+  afterEach((done) => {
+    server.close();
+    done();
   });
 
   it('GET 200', async () => {
@@ -122,49 +120,35 @@ describe('users', () => {
     expect(res).toHaveHTTPStatus(200);
   });
 
-  it('GET 200 /user/1', async () => {
+  it('GET 403 /users/1 unAuth', async () => {
     const res = await request.agent(server)
-      .get('/user/1');
-    expect(res).toHaveHTTPStatus(200);
+      .get('/users/1');
+    expect(res).toHaveHTTPStatus(403);
   });
 
-  it('GET 200 /user/1/edit', async () => {
+  it('GET 403 /user/1/edit unAuth', async () => {
     const res = await request.agent(server)
-      .get('/user/1/edit');
-    expect(res).toHaveHTTPStatus(200);
+      .get('/users/1/edit');
+    expect(res).toHaveHTTPStatus(403);
   });
 
   it('Update user', async () => {
-    const res = await request.agent(server)
+    const resSignIn = await request.agent(server)
       .post('/session')
       .type('form')
       .send({ form: { ...user } });
-    expect(res).toHaveHTTPStatus(302);
+    expect(resSignIn).toHaveHTTPStatus(302);
 
-    const res2 = await request.agent(server)
-      .patch('/user/1')
+    const res = await request.agent(server)
+      .patch('/users/1')
       .type('form')
       .send({ ...userUpdate });
-    expect(res2).toHaveHTTPStatus(302);
+    expect(res).toHaveHTTPStatus(302);
   });
 
   it('Delete user', async () => {
     const res = await request.agent(server)
-      .post('/session')
-      .type('form')
-      .send({ form: { ...user } });
+      .delete('/users/1');
     expect(res).toHaveHTTPStatus(302);
-
-    const res2 = await request.agent(server)
-      .delete('/user/1')
-      .type('form')
-      .send({ ...user });
-    expect(res2).toHaveHTTPStatus(302);
-  });
-
-
-  afterEach((done) => {
-    server.close();
-    done();
   });
 });
