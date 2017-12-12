@@ -13,7 +13,7 @@ export default (router) => {
       const user = User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
     })
-    .post('users', '/users', requiredAuth, async (ctx) => {
+    .post('users', '/users', async (ctx) => {
       const { form } = ctx.request.body;
       log(form);
       const user = User.build(form);
@@ -55,6 +55,7 @@ export default (router) => {
       const { form } = ctx.request.body;
       log(form);
       const user = await User.findById(id);
+      console.log('===========', ctx.session.userId);
       try {
         await user.update({ ...form });
         ctx.session.fullName = user.fullName;
