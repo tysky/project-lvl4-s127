@@ -1,6 +1,6 @@
 {
   "development": {
-      "storage": "./db.development.sqlite",
+    "storage": "./db.development.sqlite",
     "dialect": "sqlite"
   },
   "test": {
@@ -8,6 +8,7 @@
     "dialect": "sqlite"
   },
   "production": {
+    "use_env_variable": "DATABASE_URL",
     "username": "root",
     "password": null,
     "database": "database_production",
