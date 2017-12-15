@@ -22,7 +22,7 @@ export default (router) => {
         ctx.redirect(router.url('root'));
         return;
       }
-      const data = {};
+      const data = { email };
       ctx.state.errorMessage = 'Email or password were wrong. Try again';
       ctx.render('sessions/new', { f: buildFormObj(data) });
       ctx.response.status = 422;
